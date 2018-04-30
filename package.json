@@ -1,0 +1,24 @@
+{
+  "name": "nodeschool_tutorials",
+  "version": "1.0.0",
+  "description": "Nodejs and JS workshops solutions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Villian79/nodeschool_tutorials.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "codeschool.io"
+  ],
+  "author": "Igor Vilinchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Villian79/nodeschool_tutorials/issues"
+  },
+  "homepage": "https://github.com/Villian79/nodeschool_tutorials#readme"
+}
