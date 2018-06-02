@@ -2,25 +2,30 @@ const http 	= require('http');
 const url	= require('url');
 
 let objTime	= {}
-const port = process.argv[2];
+const port = +process.argv[2];
 
 let server = http.createServer((req, res) => {
-	console.log(url.parse(req.url, true));
+	let objUrl = url.parse(req.url, true);
+	let date = new Date(objUrl.query.iso);
 	
-	let stringISO = url.parse(req.url, true).query.iso;
-	
-	let date = new Date(stringISO);
-	
-	let dateUnix = Date.now(date);
-		
-	objTime.hour = date.getHours();
-	objTime.minute = date.getMinutes();
-	objTime.second = date.getSeconds();
-	
-	//res.writeHead(200, {'Content-Type': 'application/json'});
-	//res.end(JSON.stringify(objTime));
-
-
+	let patt = /parsetime/;
+	let pattUnix = /unixtime/;
+	if(patt.test(objUrl.pathname)){
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.end(JSON.stringify({
+			hour: 	date.getHours(),
+			minute: date.getMinutes(),
+			second: date.getSeconds()
+		}));
+	}
+	else if(pattUnix.test(objUrl.pathname)){
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.end(JSON.stringify({unixtime: date.getTime()}));
+	}
+	else{
+		res.writeHead(404, { 'Content-Type': 'text/plain' });
+		res.end('Page was not found...');
+	}
 });
 
 server.listen(port, err => {
